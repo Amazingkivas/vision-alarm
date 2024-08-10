@@ -12,6 +12,10 @@ dependencies:
     sdk: flutter
   camera: ^0.9.4+5
   tflite: ^1.1.2
+  file_picker: ^4.0.0
+  flutter_local_notifications: ^9.0.0
+  timezone: ^0.8.0
+  audioplayers: ^6.0.0
 
 dev_dependencies:
   flutter_test:

@@ -14,7 +14,7 @@ class AddEditAlarmScreen extends StatefulWidget {
 
 class _AddEditAlarmScreenState extends State<AddEditAlarmScreen> {
   TimeOfDay _selectedTime = TimeOfDay.now();
-  String _selectedRingtone = 'Default';
+  String _selectedRingtone = '';  // Начальное значение пустое
   String _selectedSymbol = 'α';
 
   @override
@@ -55,7 +55,7 @@ class _AddEditAlarmScreenState extends State<AddEditAlarmScreen> {
             ),
             ListTile(
               title: Text('Ringtone'),
-              subtitle: Text(_selectedRingtone),
+              subtitle: Text(_selectedRingtone.isNotEmpty ? _selectedRingtone.split('/').last : 'Default'),
               trailing: Icon(Icons.arrow_forward_ios),
               onTap: () async {
                 final String? picked = await Navigator.push(

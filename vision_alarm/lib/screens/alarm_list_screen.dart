@@ -6,13 +6,15 @@ import '../services/alarm_service.dart';
 import '../widgets/alarm_tile.dart';
 
 class AlarmListScreen extends StatefulWidget {
+  final AlarmService alarmService;
+
+  AlarmListScreen({required this.alarmService});
+
   @override
   _AlarmListScreenState createState() => _AlarmListScreenState();
 }
 
 class _AlarmListScreenState extends State<AlarmListScreen> {
-  final AlarmService _alarmService = AlarmService();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,7 +32,7 @@ class _AlarmListScreenState extends State<AlarmListScreen> {
               );
               if (newAlarm != null) {
                 setState(() {
-                  _alarmService.addAlarm(newAlarm);
+                  widget.alarmService.addAlarm(newAlarm);
                 });
               }
             },
@@ -38,13 +40,13 @@ class _AlarmListScreenState extends State<AlarmListScreen> {
         ],
       ),
       body: ListView.builder(
-        itemCount: _alarmService.getAlarms().length,
+        itemCount: widget.alarmService.getAlarms().length,
         itemBuilder: (context, index) {
           return AlarmTile(
-            alarm: _alarmService.getAlarms()[index],
+            alarm: widget.alarmService.getAlarms()[index],
             onDelete: () {
               setState(() {
-                _alarmService.deleteAlarm(index);
+                widget.alarmService.deleteAlarm(index);
               });
             },
             onEdit: () async {
@@ -52,13 +54,13 @@ class _AlarmListScreenState extends State<AlarmListScreen> {
                 context,
                 MaterialPageRoute(
                   builder: (context) => AddEditAlarmScreen(
-                    alarm: _alarmService.getAlarms()[index],
+                    alarm: widget.alarmService.getAlarms()[index],
                   ),
                 ),
               );
               if (editedAlarm != null) {
                 setState(() {
-                  _alarmService.getAlarms()[index] = editedAlarm;
+                  widget.alarmService.getAlarms()[index] = editedAlarm;
                 });
               }
             },

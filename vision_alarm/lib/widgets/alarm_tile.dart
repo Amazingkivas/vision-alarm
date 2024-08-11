@@ -7,13 +7,17 @@ class AlarmTile extends StatelessWidget {
   final VoidCallback onDelete;
   final VoidCallback onEdit;
 
-  AlarmTile({required this.alarm, required this.onDelete, required this.onEdit});
+  AlarmTile({
+    required this.alarm,
+    required this.onDelete,
+    required this.onEdit,
+  });
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
       title: Text('${alarm.time.format(context)}'),
-      subtitle: Text('Symbol: ${alarm.symbol}'),
+      subtitle: Text('Symbol: ${alarm.symbol}'),  // Отображение символа, ассоциированного с будильником
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -31,7 +35,10 @@ class AlarmTile extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => AlarmRingingScreen(symbol: alarm.symbol),
+            builder: (context) => AlarmRingingScreen(
+              ringtonePath: alarm.ringtone,  // Передача пути к рингтону
+              symbol: alarm.symbol,  // Передача символа
+            ),
           ),
         );
       },
